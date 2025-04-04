@@ -24,10 +24,19 @@ client = openai.OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 
 # print(f"OpenAI API Key: {os.getenv('OPENAI_API_KEY')}")
-app = Flask(__name__)
+#app = Flask(__name__)
 # socketio = SocketIO(app)
-socketio = SocketIO(app, cors_allowed_origins=["http://localhost:5000", "http://127.0.0.1:5000"], async_mode='eventlet')
-CORS(app, origins=["http://127.0.0.1:5000", "http://localhost:5000"])
+#socketio = SocketIO(app, cors_allowed_origins=["http://localhost:5000", "http://127.0.0.1:5000"], async_mode='eventlet')
+#CORS(app, origins=["http://127.0.0.1:5000", "http://localhost:5000"])
+
+
+app = Flask(__name__)
+
+# Fix CORS for Cloud Run (allow any origin or set specific deployed URL)
+CORS(app, resources={r"/*": {"origins": "*"}})
+
+# Use gevent (better for Cloud Run) instead of eventlet
+socketio = SocketIO(app, cors_allowed_origins="*", async_mode="gevent")
 
 conversation_history = []
 
