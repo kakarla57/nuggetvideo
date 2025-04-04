@@ -3,7 +3,7 @@ flask-socketio
 flask-cors
 python-dotenv
 openai
-eventlet==0.33.3
+eventlet
 opencv-python-headless
 numpy
 keras
