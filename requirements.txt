@@ -1,0 +1,12 @@
+flask
+flask-socketio
+flask-cors
+python-dotenv
+openai
+eventlet==0.33.3
+opencv-python-headless
+numpy
+keras
+tensorflow
+fer
+gunicorn
